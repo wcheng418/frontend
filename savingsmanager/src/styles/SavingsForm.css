@@ -1,0 +1,12 @@
+.savings-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+  }
+  
+  .savings-form input,
+  .savings-form button {
+    margin-bottom: 10px;
+    padding: 8px;
+  }
+  
