@@ -1,20 +1,423 @@
 import React, { useState } from 'react';
-import SavingsForm from '../components/SavingsForm';
-import SavingsList from '../components/SavingsList';
-import '../styles/savings.css';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import myImage from '../images/v97_24.png';
 
-export default function SavingsPage() {
+// Main SavingsPage Component
+function SavingsPage() {
+  const [amount, setAmount] = useState('');
+  const [category, setCategory] = useState('');
+  const [date, setDate] = useState('');
   const [entries, setEntries] = useState([]);
 
-  const addEntry = (entry) => {
-    setEntries([...entries, entry]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (amount && category && date) {
+      const newEntry = { amount, category, date };
+      setEntries([...entries, newEntry]);
+      setAmount('');
+      setCategory('');
+      setDate('');
+    }
   };
 
   return (
-    <div>
-      <h2>Savings Entries</h2>
-      <SavingsForm onAddEntry={addEntry} />
-      <SavingsList entries={entries} />
+    <div style={{ backgroundColor: 'rgba(138,147,180,1)', minHeight: '100vh', position: 'relative' }}>
+      {/* Header/Navigation Bar */}
+      <div style={{ 
+        width: '100%', 
+        height: '131px', 
+        backgroundColor: 'rgba(245,243,243,1)',
+        position: 'relative'
+      }}>
+        <Link to="/home" style={{ textDecoration: 'none' }}>
+          <div style={{ position: 'absolute', top: '20px', left: '40px' }}>
+            {/*<h2 style={{ fontFamily: 'serif', fontWeight: 'bold', fontSize: '32px', margin: 0 }}>BW</h2>
+            <span style={{ fontSize: '12px', letterSpacing: '1px' }}>BUDGETWALLET</span>*/}
+            <img src={myImage} alt="logo" width="100" height="100" />
+          </div>
+        </Link>
+        {/* Navigation buttons */}
+        <div style={{ display: 'flex', position: 'absolute', top: '20px', left: '220px', gap: '10px' }}>
+          <Link to="/Manage Financials" style={{ textDecoration: 'none' }}>
+            <div style={{ 
+              width: '172px', 
+              height: '40px', 
+              backgroundColor: '#3B4471', 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              color: 'black', 
+              fontFamily: 'Kaisei Decol',
+              boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
+              cursor: 'pointer'
+            }}>
+              Manage Financials
+            </div>
+          </Link>
+          <Link to="/reports" style={{ textDecoration: 'none' }}>
+            <div style={{ 
+              width: '172px', 
+              height: '40px', 
+              backgroundColor: '#BCC0CE', 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              color: 'black', 
+              fontFamily: 'Kaisei Decol',
+              boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
+              cursor: 'pointer'
+            }}>
+              Reports
+            </div>
+          </Link>
+          <Link to="/financial Goals" style={{ textDecoration: 'none' }}>
+            <div style={{ 
+              width: '172px', 
+              height: '40px', 
+              backgroundColor: '#BCC0CE', 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              color: 'black', 
+              fontFamily: 'Kaisei Decol',
+              boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
+              cursor: 'pointer'
+            }}>
+              Financial Goals
+            </div>
+          </Link>
+          <Link to="/account" style={{ textDecoration: 'none' }}>
+            <div style={{ 
+              width: '172px', 
+              height: '40px', 
+              backgroundColor: '#BCC0CE', 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              color: 'black', 
+              fontFamily: 'Kaisei Decol',
+              boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
+              cursor: 'pointer'
+            }}>
+              Account
+            </div>
+          </Link>
+          <Link to="/Logout" style={{ textDecoration: 'none' }}>
+            <div style={{ 
+              width: '172px', 
+              height: '40px', 
+              backgroundColor: '#BCC0CE', 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              color: 'black', 
+              fontFamily: 'Kaisei Decol',
+              boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
+              cursor: 'pointer'
+            }}>
+              Logout
+            </div>
+          </Link>
+        </div>
+      </div>
+      
+      {/* Sidebar */}
+      <div style={{ position: 'absolute', top: '150px', left: '15px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <Link to="/manage income entries" style={{ textDecoration: 'none' }}>
+          <div style={{ 
+            width: '190px', 
+            height: '80px', 
+            backgroundColor: '#F1F2FA', 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
+            cursor: 'pointer'
+          }}>
+            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px' }}>Manage Income Entries</span>
+          </div>
+        </Link>
+        
+        <Link to="/manage expense entries" style={{ textDecoration: 'none' }}>
+          <div style={{ 
+            width: '190px', 
+            height: '80px', 
+            backgroundColor: '#F0F2F9', 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
+            cursor: 'pointer'
+          }}>
+            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px' }}>Manage Expense Entries</span>
+          </div>
+        </Link>
+        
+        <Link to="/manage savings entries" style={{ textDecoration: 'none' }}>
+          <div style={{ 
+            width: '190px', 
+            height: '80px', 
+            backgroundColor: '#3B4471', 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
+            cursor: 'pointer'
+          }}>
+            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px' }}>Manage Savings Entries</span>
+          </div>
+        </Link>
+        
+        <Link to="/manage investment entries" style={{ textDecoration: 'none' }}>
+          <div style={{ 
+            width: '190px', 
+            height: '80px', 
+            backgroundColor: '#FFFFFF', 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
+            cursor: 'pointer'
+          }}>
+            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px' }}>Manage Investment Entries</span>
+          </div>
+        </Link>
+      </div>
+      
+      {/* Main Content Area */}
+      <div style={{ 
+        position: 'absolute', 
+        top: '150px', 
+        left: '250px', 
+        width: '750px',
+        height: '500px',
+        backgroundColor: '#FFFFFF',
+        borderRadius: '45px',
+        boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
+        padding: '20px',
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
+        {/* Filter options */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginBottom: '20px' }}>
+          <div style={{ 
+            width: '120px', 
+            height: '30px', 
+            backgroundColor: '#D9D9D9', 
+            borderRadius: '30px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontFamily: 'Kaisei Decol'
+          }}>
+            Date
+          </div>
+          <div style={{ 
+            width: '120px', 
+            height: '30px', 
+            backgroundColor: '#D9D9D9', 
+            borderRadius: '30px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontFamily: 'Kaisei Decol'
+          }}>
+            Category
+          </div>
+        </div>
+        
+        {/* Form Area */}
+        <div style={{ 
+          backgroundColor: '#D9D9D9', 
+          flex: 1, 
+          borderRadius: '30px',
+          padding: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: '500px' }}>
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
+                Savings amount
+              </label>
+              <input
+                style={{ 
+                  width: '100%', 
+                  height: '36px', 
+                  backgroundColor: '#FFFFFF',
+                  border: 'none',
+                  paddingLeft: '10px'
+                }}
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="Enter amount"
+                required
+              />
+            </div>
+            
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
+                Category
+              </label>
+              <input
+                style={{ 
+                  width: '100%', 
+                  height: '36px', 
+                  backgroundColor: '#FFFFFF',
+                  border: 'none',
+                  borderRadius: '20px',
+                  paddingLeft: '10px'
+                }}
+                type="text"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                placeholder="Enter category"
+                required
+              />
+            </div>
+            
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
+                Date
+              </label>
+              <input
+                style={{ 
+                  width: '100%', 
+                  height: '36px', 
+                  backgroundColor: '#FFFFFF',
+                  border: 'none',
+                  paddingLeft: '10px'
+                }}
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                required
+              />
+            </div>
+            
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <button
+                style={{ 
+                  width: '106px', 
+                  height: '36px', 
+                  backgroundColor: '#FFFFFF',
+                  border: 'none',
+                  borderRadius: '20px',
+                  fontFamily: 'Kaisei Decol',
+                  fontSize: '20px',
+                  cursor: 'pointer'
+                }}
+                type="submit"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      {/* Savings Entries List */}
+      <div style={{ 
+        position: 'absolute', 
+        top: '670px', 
+        left: '250px', 
+        width: '750px',
+        backgroundColor: '#FFFFFF',
+        borderRadius: '45px',
+        padding: '20px',
+        marginBottom: '30px'
+      }}>
+        <h3 style={{ fontFamily: 'Kaisei Decol', fontSize: '24px', marginBottom: '20px' }}>Savings Entries</h3>
+        {entries.length > 0 ? (
+          <ul style={{ listStyle: 'none', padding: '0' }}>
+            {entries.map((entry, index) => (
+              <li key={index} style={{ 
+                padding: '10px', 
+                margin: '5px 0', 
+                backgroundColor: '#F5F5F5',
+                borderRadius: '10px',
+                fontFamily: 'Kaisei Decol'
+              }}>
+                ${entry.amount} - {entry.category} on {entry.date}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p style={{ fontFamily: 'Kaisei Decol', color: '#666' }}>No entries yet. Add your first savings entry above.</p>
+        )}
+      </div>
     </div>
+  );
+}
+
+// Under Construction Component
+function UnderConstruction() {
+  const navigate = useNavigate();
+  
+  return (
+    <div style={{ 
+      backgroundColor: 'rgba(138,147,180,1)', 
+      minHeight: '100vh', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      justifyContent: 'center', 
+      alignItems: 'center' 
+    }}>
+      <div style={{ 
+        backgroundColor: '#FFFFFF',
+        borderRadius: '45px',
+        padding: '40px',
+        maxWidth: '600px',
+        textAlign: 'center',
+        boxShadow: '0px 4px 4px rgba(0,0,0,0.25)'
+      }}>
+        <h2 style={{ fontFamily: 'Kaisei Decol', fontSize: '32px', marginBottom: '20px' }}>
+          Under Construction
+        </h2>
+        <p style={{ fontFamily: 'Kaisei Decol', fontSize: '18px', marginBottom: '30px' }}>
+          This page is currently under development. Please check back later.
+        </p>
+        <button 
+          onClick={() => navigate('/')}
+          style={{ 
+            padding: '10px 20px',
+            backgroundColor: '#3B4471',
+            color: 'white',
+            border: 'none',
+            borderRadius: '20px',
+            fontFamily: 'Kaisei Decol',
+            fontSize: '18px',
+            cursor: 'pointer',
+            boxShadow: '0px 4px 4px rgba(0,0,0,0.25)'
+          }}
+        >
+          Return to Savings
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// App Component with Routes
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<SavingsPage />} />
+        <Route path="/home" element={<UnderConstruction />} />
+        <Route path="/Manage Financials" element={<UnderConstruction />} />
+        <Route path="/Reports" element={<UnderConstruction />} />
+        <Route path="/Financial Goals" element={<UnderConstruction />} />
+        <Route path="/Account" element={<UnderConstruction />} />
+        <Route path="/Logout" element={<UnderConstruction />} />
+        <Route path="/Manage Income Entries" element={<UnderConstruction />} />
+        <Route path="/Manage Expense Entries" element={<UnderConstruction />} />
+        <Route path="/Manage Savings Entries" element={<SavingsPage />} />
+        <Route path="/Manage Investment Entries" element={<UnderConstruction />} />
+      </Routes>
+    </Router>
   );
 }
