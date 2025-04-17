@@ -3,7 +3,7 @@ import { BrowserRouter as Link } from 'react-router-dom';
 import myImage from '../images/v97_24.png';
 
 // Main SavingsPage Component
-export default function SavingsPage() {
+export default function InvestmentPage() {
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
   const [date, setDate] = useState('');
