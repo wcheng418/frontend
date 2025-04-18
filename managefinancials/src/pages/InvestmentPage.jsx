@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import myImage from '../images/v97_24.png';
 
 // Main SavingsPage Component
 export default function InvestmentPage() {
-  const [amount, setAmount] = useState('');
+  const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [date, setDate] = useState('');
+  const [amount, setAmount] = useState('');
   const [entries, setEntries] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (amount && category && date) {
-      const newEntry = { amount, category, date };
+    if (name && category && amount) {
+      const newEntry = { name, category, amount };
       setEntries([...entries, newEntry]);
-      setAmount('');
+      setName('');
       setCategory('');
-      setDate('');
+      setAmount('');
     }
   };
 
@@ -157,7 +157,7 @@ export default function InvestmentPage() {
           <div style={{ 
             width: '190px', 
             height: '80px', 
-            backgroundColor: '#3B4471', 
+            backgroundColor: '#FFFFFF', 
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
@@ -172,7 +172,7 @@ export default function InvestmentPage() {
           <div style={{ 
             width: '190px', 
             height: '80px', 
-            backgroundColor: '#FFFFFF', 
+            backgroundColor: '#3B4471', 
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
@@ -210,7 +210,7 @@ export default function InvestmentPage() {
             alignItems: 'center',
             fontFamily: 'Kaisei Decol'
           }}>
-            Date
+            Add Investment
           </div>
           <div style={{ 
             width: '120px', 
@@ -222,7 +222,7 @@ export default function InvestmentPage() {
             alignItems: 'center',
             fontFamily: 'Kaisei Decol'
           }}>
-            Category
+            Delete Investment
           </div>
         </div>
         
@@ -238,9 +238,54 @@ export default function InvestmentPage() {
           alignItems: 'center'
         }}>
           <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: '500px' }}>
+            
+          <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
+                Name
+              </label>
+              <input
+                style={{ 
+                  width: '100%', 
+                  height: '36px', 
+                  backgroundColor: '#FFFFFF',
+                  border: 'none',
+                  paddingLeft: '10px'
+                }}
+                type="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+
             <div style={{ marginBottom: '20px' }}>
               <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
-                Savings amount
+                Type of investment
+              </label>
+              <select
+                style={{ 
+                  width: '100%', 
+                  height: '36px', 
+                  backgroundColor: '#FFFFFF',
+                  border: 'none',
+                  borderRadius: '20px',
+                  paddingLeft: '10px',
+                  fontFamily: 'Kaisei Decol'
+                }}
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+              >
+                <option value="" disabled>Select a category</option>
+                <option value="Stocks">Stocks</option>
+                <option value="Real Estate">Real Estate</option>
+                <option value="ETFs">ETFs</option>
+              </select>
+            </div>
+
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
+                Value
               </label>
               <input
                 style={{ 
@@ -254,46 +299,6 @@ export default function InvestmentPage() {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="Enter amount"
-                required
-              />
-            </div>
-            
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
-                Category
-              </label>
-              <input
-                style={{ 
-                  width: '100%', 
-                  height: '36px', 
-                  backgroundColor: '#FFFFFF',
-                  border: 'none',
-                  borderRadius: '20px',
-                  paddingLeft: '10px'
-                }}
-                type="text"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                placeholder="Enter category"
-                required
-              />
-            </div>
-            
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
-                Date
-              </label>
-              <input
-                style={{ 
-                  width: '100%', 
-                  height: '36px', 
-                  backgroundColor: '#FFFFFF',
-                  border: 'none',
-                  paddingLeft: '10px'
-                }}
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
                 required
               />
             </div>
@@ -319,7 +324,7 @@ export default function InvestmentPage() {
         </div>
       </div>
       
-      {/* Savings Entries List */}
+      {/*Entries List */}
       <div style={{ 
         position: 'absolute', 
         top: '670px', 
@@ -330,7 +335,7 @@ export default function InvestmentPage() {
         padding: '20px',
         marginBottom: '30px'
       }}>
-        <h3 style={{ fontFamily: 'Kaisei Decol', fontSize: '24px', marginBottom: '20px' }}>Savings Entries</h3>
+        <h3 style={{ fontFamily: 'Kaisei Decol', fontSize: '24px', marginBottom: '20px' }}>Investment Entries</h3>
         {entries.length > 0 ? (
           <ul style={{ listStyle: 'none', padding: '0' }}>
             {entries.map((entry, index) => (
@@ -341,12 +346,12 @@ export default function InvestmentPage() {
                 borderRadius: '10px',
                 fontFamily: 'Kaisei Decol'
               }}>
-                ${entry.amount} - {entry.category} on {entry.date}
+                {entry.name} / {entry.category} - ${entry.amount}
               </li>
             ))}
           </ul>
         ) : (
-          <p style={{ fontFamily: 'Kaisei Decol', color: '#666' }}>No entries yet. Add your first savings entry above.</p>
+          <p style={{ fontFamily: 'Kaisei Decol', color: '#666' }}>No entries yet. Add your first investment entry above.</p>
         )}
       </div>
     </div>

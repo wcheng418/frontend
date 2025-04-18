@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import FrontPage from './pages/FrontPage';
 import SavingsPage from './pages/SavingsPage';
 import InvestmentPage from './pages/InvestmentPage';
+import AccountPage from './pages/AccountPage';
 import UnderConstructionPage from './pages/UnderConstructionPage';
 
 function App() {
@@ -11,12 +12,12 @@ function App() {
       <Routes>
         <Route path="/" element={<FrontPage />} />
         <Route path="/home" element={<FrontPage />} />
-        <Route path="/Manage Financials" element={<UnderConstructionPage />} />
+        <Route path="/Manage Financials" element={<FrontPage />} />
         <Route path="/Reports" element={<UnderConstructionPage />} />
         <Route path="/Financial Goals" element={<UnderConstructionPage />} />
-        <Route path="/Account" element={<UnderConstructionPage />} />
+        <Route path="/Account" element={<AccountPage />} />
         <Route path="/Logout" element={<UnderConstructionPage />} />
-        <Route path="/Manage Income Entries" element={<UnderConstructionPage />} />
+        <Route path="/Manage Income Entries" element={<FrontPage />} />
         <Route path="/Manage Expense Entries" element={<UnderConstructionPage />} />
         <Route path="/Manage Savings Entries" element={<SavingsPage />} />
         <Route path="/Manage Investment Entries" element={<InvestmentPage />} />

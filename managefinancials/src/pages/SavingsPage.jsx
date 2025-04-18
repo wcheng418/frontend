@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import myImage from '../images/v97_24.png';
 
 // Main SavingsPage Component
@@ -31,8 +31,6 @@ export default function SavingsPage() {
       }}>
         <Link to="/home" style={{ textDecoration: 'none' }}>
           <div style={{ position: 'absolute', top: '20px', left: '40px' }}>
-            {/*<h2 style={{ fontFamily: 'serif', fontWeight: 'bold', fontSize: '32px', margin: 0 }}>BW</h2>
-            <span style={{ fontSize: '12px', letterSpacing: '1px' }}>BUDGETWALLET</span>*/}
             <img src={myImage} alt="logo" width="100" height="100" />
           </div>
         </Link>
@@ -210,7 +208,7 @@ export default function SavingsPage() {
             alignItems: 'center',
             fontFamily: 'Kaisei Decol'
           }}>
-            Date
+            Add Savings
           </div>
           <div style={{ 
             width: '120px', 
@@ -222,7 +220,7 @@ export default function SavingsPage() {
             alignItems: 'center',
             fontFamily: 'Kaisei Decol'
           }}>
-            Category
+            Delete Savings
           </div>
         </div>
         
@@ -262,21 +260,27 @@ export default function SavingsPage() {
               <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
                 Category
               </label>
-              <input
+              <select
                 style={{ 
                   width: '100%', 
                   height: '36px', 
                   backgroundColor: '#FFFFFF',
                   border: 'none',
                   borderRadius: '20px',
-                  paddingLeft: '10px'
+                  paddingLeft: '10px',
+                  fontFamily: 'Kaisei Decol'
                 }}
-                type="text"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                placeholder="Enter category"
                 required
-              />
+              >
+                <option value="" disabled>Select a category</option>
+                <option value="Emergency Funds">Emergency Funds</option>
+                <option value="House">House</option>
+                <option value="Car">Car</option>
+                <option value="Vacation">Vacation</option>
+                <option value="Education">Education</option>
+              </select>
             </div>
             
             <div style={{ marginBottom: '20px' }}>
