@@ -169,6 +169,7 @@ export default function SavingsPage() {
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
+            color: 'black', 
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
@@ -184,6 +185,7 @@ export default function SavingsPage() {
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
+            color: 'black', 
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
@@ -199,6 +201,7 @@ export default function SavingsPage() {
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
+            color: 'black', 
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
@@ -214,6 +217,7 @@ export default function SavingsPage() {
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
+            color: 'black', 
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>

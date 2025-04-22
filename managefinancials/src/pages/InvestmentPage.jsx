@@ -188,6 +188,7 @@ export default function InvestmentPage() {
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
+            color: 'black', 
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
@@ -203,6 +204,7 @@ export default function InvestmentPage() {
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
+            color: 'black', 
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
@@ -218,6 +220,7 @@ export default function InvestmentPage() {
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
+            color: 'black', 
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
@@ -307,6 +310,7 @@ export default function InvestmentPage() {
                 type="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                placeholder='Enter Investment'
                 required
               />
             </div>
@@ -399,7 +403,7 @@ export default function InvestmentPage() {
                 borderRadius: '10px',
                 fontFamily: 'Kaisei Decol'
               }}>
-                <span>${entry.amount} - {entry.category} on {entry.date}</span>
+                <span>${entry.amount} - {entry.category} on {entry.name}</span>
                 <button 
                   onClick={() => handleDelete(index)} 
                   style={{

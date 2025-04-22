@@ -216,19 +216,208 @@ function AccountPage() {
               </div>
               </Link>
           </div>
+          {/* Main content area */}
           <div style={{ 
             position: 'absolute', 
             top: '150px', 
             left: '250px', 
             width: '750px',
             height: '500px',
-            backgroundColor: '#FFFFFF',
+            backgroundColor: '#F1F2FA',
             borderRadius: '45px',
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
-            padding: '20px',
+            padding: '40px',
             display: 'flex',
             flexDirection: 'column'
-          }}></div>
+            
+          }}>
+            
+            {/* Profile Settings Title */}
+            <h2 style={{
+              fontFamily: 'Kaisei Decol',
+              fontSize: '40px',
+              fontWeight: 'Medium',
+              color: 'rgba(0,0,0,1)',
+              textAlign: 'center',
+              marginBottom: '30px'
+            }}>
+              Profile Settings
+            </h2>
+            
+            {/* Profile Form */}
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              {/* Profile Picture Section */}
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                  <img 
+                    src={previewImage} 
+                    alt="Profile" 
+                    style={{
+                      width: '120px',
+                      height: '120px',
+                      borderRadius: '60px',
+                      objectFit: 'cover',
+                      border: '1px solid #000'
+                    }}
+                  />
+                  <input 
+                    type="file" 
+                    id="profile-picture" 
+                    accept="image/*" 
+                    onChange={handleProfilePictureChange}
+                    style={{ display: 'none' }}
+                  />
+                  <label 
+                    htmlFor="profile-picture"
+                    style={{
+                      padding: '8px 16px',
+                      background: 'rgba(59,68,113,1)',
+                      color: 'white',
+                      borderRadius: '5px',
+                      cursor: 'pointer',
+                      fontFamily: 'Kaisei Decol',
+                      fontSize: '16px'
+                    }}
+                  >
+                    Change Profile Picture
+                  </label>
+                </div>
+              </div>
+              
+              {/* First Name */}
+              <div style={{ marginBottom: '10px' }}>
+                <label style={{
+                  display: 'block',
+                  fontFamily: 'Kaisei Decol',
+                  fontSize: '24px',
+                  fontWeight: 'Medium',
+                  marginBottom: '8px'
+                }}>
+                  First Name
+                </label>
+                <div style={{
+                  width: '100%',
+                  height: '62px',
+                  background: 'rgba(255,255,255,1)',
+                  border: '1px solid rgba(0,0,0,1)',
+                  borderRadius: '11px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '0 20px'
+                }}>
+                  <input
+                    type="text"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    style={{
+                      width: '100%',
+                      height: '90%',
+                      border: 'none',
+                      outline: 'none',
+                      fontFamily: 'Kaisei Decol',
+                      fontSize: '24px'
+                    }}
+                  />
+                </div>
+              </div>
+              
+              {/* Last Name */}
+              <div style={{ marginBottom: '10px' }}>
+                <label style={{
+                  display: 'block',
+                  fontFamily: 'Kaisei Decol',
+                  fontSize: '24px',
+                  fontWeight: 'Medium',
+                  marginBottom: '8px'
+                }}>
+                  Last Name
+                </label>
+                <div style={{
+                  width: '100%',
+                  height: '62px',
+                  background: 'rgba(255,255,255,1)',
+                  border: '1px solid rgba(0,0,0,1)',
+                  borderRadius: '11px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '0 20px'
+                }}>
+                  <input
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    style={{
+                      width: '100%',
+                      height: '90%',
+                      border: 'none',
+                      outline: 'none',
+                      fontFamily: 'Kaisei Decol',
+                      fontSize: '24px'
+                    }}
+                  />
+                </div>
+              </div>
+              
+              {/* Email */}
+              <div style={{ marginBottom: '10px' }}>
+                <label style={{
+                  display: 'block',
+                  fontFamily: 'Kaisei Decol',
+                  fontSize: '24px',
+                  fontWeight: 'Medium',
+                  marginBottom: '8px'
+                }}>
+                  Email
+                </label>
+                <div style={{
+                  width: '100%',
+                  height: '62px',
+                  background: 'rgba(255,255,255,1)',
+                  border: '1px solid rgba(0,0,0,1)',
+                  borderRadius: '11px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '0 20px'
+                }}>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    style={{
+                      width: '100%',
+                      height: '90%',
+                      border: 'none',
+                      outline: 'none',
+                      fontFamily: 'Kaisei Decol',
+                      fontSize: '24px'
+                    }}
+                  />
+                </div>
+              </div>
+              
+              {/* Save Button */}
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+                <button
+                  type="submit"
+                  style={{
+                    width: '146px',
+                    height: '37px',
+                    background: 'rgba(0,0,0,0.38)',
+                    border: '1px solid rgba(0,0,0,1)',
+                    borderRadius: '11px',
+                    fontFamily: 'Kaisei Decol',
+                    fontWeight: 'Medium',
+                    fontSize: '24px',
+                    color: 'rgba(0,0,0,1)',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+
+          </div>
       </div>
     </div>
   );
