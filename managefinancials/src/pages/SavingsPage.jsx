@@ -17,9 +17,49 @@ export default function SavingsPage() {
       setAmount('');
       setCategory('');
       setDate('');
+
+      /*
+      fetch('http://localhost:8080/api/savings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newEntry),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to save savings entry');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log('Savings saved:', data);
+        })
+        .catch((error) => {
+          console.error('Error saving savings:', error);
+        });
+      */
     }
   };
-
+  
+  const handleDelete = (indexToRemove) => {
+    setEntries(entries.filter((_, index) => index !== indexToRemove));
+    /*
+    fetch(`http://localhost:8080/api/savings/${entryToDelete.id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to delete savings entry');
+        }
+        console.log('Savings entry deleted');
+      })
+      .catch((error) => {
+        console.error('Error deleting savings entry:', error);
+      });
+    */
+  };
+  
   return (
     <div style={{ backgroundColor: 'rgba(138,147,180,1)', minHeight: '100vh', position: 'relative' }}>
       {/* Header/Navigation Bar */}
@@ -198,30 +238,41 @@ export default function SavingsPage() {
       }}>
         {/* Filter options */}
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginBottom: '20px' }}>
-          <div style={{ 
-            width: '120px', 
-            height: '30px', 
-            backgroundColor: '#D9D9D9', 
-            borderRadius: '30px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            fontFamily: 'Kaisei Decol'
-          }}>
+          <button
+            onClick={handleSubmit}
+            style={{
+              width: '120px',
+              height: '30px',
+              backgroundColor: '#D9D9D9',
+              borderRadius: '30px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              fontFamily: 'Kaisei Decol',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+          >
             Add Savings
-          </div>
-          <div style={{ 
-            width: '120px', 
-            height: '30px', 
-            backgroundColor: '#D9D9D9', 
-            borderRadius: '30px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            fontFamily: 'Kaisei Decol'
-          }}>
+          </button>
+
+          <button
+            onClick={() => setEntries(entries.slice(0, -1))}
+            style={{
+              width: '120px',
+              height: '30px',
+              backgroundColor: '#D9D9D9',
+              borderRadius: '30px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              fontFamily: 'Kaisei Decol',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+          >
             Delete Savings
-          </div>
+          </button>
         </div>
         
         {/* Form Area */}
@@ -345,7 +396,23 @@ export default function SavingsPage() {
                 borderRadius: '10px',
                 fontFamily: 'Kaisei Decol'
               }}>
-                ${entry.amount} - {entry.category} on {entry.date}
+                <span>{entry.name} / {entry.category} - ${entry.amount}</span>
+                <button 
+                  onClick={() => handleDelete(index)} 
+                  style={{
+                    marginLeft: '10px',
+                    backgroundColor: '#FF6B6B',
+                    border: 'none',
+                    borderRadius: '10px',
+                    color: 'white',
+                    cursor: 'pointer',
+                    padding: '5px 10px',
+                    fontFamily: 'Kaisei Decol'
+                  }}
+                >
+                  Delete
+                </button>
+
               </li>
             ))}
           </ul>
