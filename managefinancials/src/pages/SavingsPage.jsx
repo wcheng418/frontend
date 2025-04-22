@@ -202,7 +202,7 @@ export default function SavingsPage() {
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
-            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px' }}>Manage Savings Entries</span>
+            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px', color: '#000000' }}>Manage Savings Entries</span>
           </div>
         </Link>
         

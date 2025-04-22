@@ -221,7 +221,7 @@ export default function InvestmentPage() {
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
-            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px' }}>Manage Investment Entries</span>
+            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px', color: '#000000'  }}>Manage Investment Entries</span>
           </div>
         </Link>
       </div>
@@ -294,7 +294,7 @@ export default function InvestmentPage() {
             
           <div style={{ marginBottom: '20px' }}>
               <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
-                Name
+                Investment
               </label>
               <input
                 style={{ 
