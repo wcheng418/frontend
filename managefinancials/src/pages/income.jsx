@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import myImage from '../images/v97_24.png';
 
-// Main InvestmentPage Component
-export default function InvestmentPage() {
-  const [name, setName] = useState('');
-  const [category, setCategory] = useState('');
+// Main IncomePage Component
+export default function IncomePage() {
   const [amount, setAmount] = useState('');
+  const [category, setCategory] = useState('');
+  const [date, setDate] = useState('');
   const [entries, setEntries] = useState([]);
-
+  
   useEffect(() => {
     /*
-      // Fetch investment entries from Java backend on component mount
-      fetch('http://localhost:8080/api/investments')
+      // Fetch income entries from Java backend on component mount
+      fetch('http://localhost:8080/api/income')
         .then(response => {
           if (!response.ok) {
-            throw new Error('Failed to fetch investment entries');
+            throw new Error('Failed to fetch income entries');
           }
           return response.json();
         })
@@ -24,22 +24,22 @@ export default function InvestmentPage() {
           setEntries(data);
         })
         .catch(error => {
-          console.error('Error loading investment entries:', error);
+          console.error('Error loading income entries:', error);
         });
     */
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name && category && amount) {
-      const newEntry = { name, category, amount };
+    if (amount && category && date) {
+      const newEntry = { amount, category, date };
       setEntries([...entries, newEntry]);
-      setName('');
-      setCategory('');
       setAmount('');
+      setCategory('');
+      setDate('');
 
       /*
-      fetch('http://localhost:8080/api/investments', {
+      fetch('http://localhost:8080/api/income', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,21 +48,19 @@ export default function InvestmentPage() {
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error('Failed to save investment');
+            throw new Error('Failed to save income entry');
           }
           return response.json();
         })
         .then((data) => {
-          console.log('Investment saved:', data);
+          console.log('Income saved:', data);
         })
         .catch((error) => {
-          console.error('Error saving investment:', error);
+          console.error('Error saving income:', error);
         });
       */
-
     }
   };
-
   
   const handleDelete = (indexToRemove) => {
     const entryToDelete = entries[indexToRemove];
@@ -72,20 +70,21 @@ export default function InvestmentPage() {
   
     /*
       // Replace `entryToDelete.id` with the actual ID from the database once available
-      fetch(`http://localhost:8080/api/investments/${entryToDelete.id}`, {
+      fetch(`http://localhost:8080/api/income/${entryToDelete.id}`, {
         method: 'DELETE',
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error('Failed to delete investment entry');
+            throw new Error('Failed to delete income entry');
           }
-          console.log('investment entry deleted');
+          console.log('Income entry deleted');
         })
         .catch((error) => {
-          console.error('Error deleting investment entry:', error);
+          console.error('Error deleting income entry:', error);
         });
     */
   };
+  
   
   return (
     <div style={{ backgroundColor: 'rgba(138,147,180,1)', minHeight: '100vh', position: 'relative' }}>
@@ -98,8 +97,6 @@ export default function InvestmentPage() {
       }}>
         <Link to="/home" style={{ textDecoration: 'none' }}>
           <div style={{ position: 'absolute', top: '20px', left: '40px' }}>
-            {/*<h2 style={{ fontFamily: 'serif', fontWeight: 'bold', fontSize: '32px', margin: 0 }}>BW</h2>
-            <span style={{ fontSize: '12px', letterSpacing: '1px' }}>BUDGETWALLET</span>*/}
             <img src={myImage} alt="logo" width="100" height="100" />
           </div>
         </Link>
@@ -194,11 +191,11 @@ export default function InvestmentPage() {
           <div style={{ 
             width: '190px', 
             height: '80px', 
-            backgroundColor: '#F1F2FA', 
+            backgroundColor: '#3B4471', 
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
-            color: 'black',
+            color: 'black', 
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
@@ -234,7 +231,7 @@ export default function InvestmentPage() {
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
-            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px' }}>Manage Savings Entries</span>
+            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px', color: '#000000' }}>Manage Savings Entries</span>
           </div>
         </Link>
         
@@ -242,7 +239,7 @@ export default function InvestmentPage() {
           <div style={{ 
             width: '190px', 
             height: '80px', 
-            backgroundColor: '#3B4471', 
+            backgroundColor: '#FFFFFF', 
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
@@ -250,7 +247,7 @@ export default function InvestmentPage() {
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
-            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px', color: '#000000'  }}>Manage Investment Entries</span>
+            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px' }}>Manage Investment Entries</span>
           </div>
         </Link>
       </div>
@@ -269,6 +266,7 @@ export default function InvestmentPage() {
         display: 'flex',
         flexDirection: 'column'
       }}>
+
         
         {/* Form Area */}
         <div style={{ 
@@ -282,10 +280,9 @@ export default function InvestmentPage() {
           alignItems: 'center'
         }}>
           <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: '500px' }}>
-            
-          <div style={{ marginBottom: '20px' }}>
+            <div style={{ marginBottom: '20px' }}>
               <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
-                Investment
+                Income amount
               </label>
               <input
                 style={{ 
@@ -295,17 +292,17 @@ export default function InvestmentPage() {
                   border: 'none',
                   paddingLeft: '10px'
                 }}
-                type="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder='Enter Investment'
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="Enter amount"
                 required
               />
             </div>
-
+            
             <div style={{ marginBottom: '20px' }}>
               <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
-                Type of investment
+                Category
               </label>
               <select
                 style={{ 
@@ -322,15 +319,16 @@ export default function InvestmentPage() {
                 required
               >
                 <option value="" disabled>Select a category</option>
-                <option value="Stocks">Stocks</option>
-                <option value="Real Estate">Real Estate</option>
-                <option value="ETFs">ETFs</option>
+                <option value="Salary">Salary</option>
+                <option value="Tip">Tip</option>
+                <option value="Commission">Commission</option>
+                <option value="Bonus">Bonus</option>
               </select>
             </div>
-
+            
             <div style={{ marginBottom: '20px' }}>
               <label style={{ display: 'block', marginBottom: '5px', fontFamily: 'Kaisei Decol', fontSize: '20px' }}>
-                Value
+                Date
               </label>
               <input
                 style={{ 
@@ -340,10 +338,9 @@ export default function InvestmentPage() {
                   border: 'none',
                   paddingLeft: '10px'
                 }}
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                placeholder="Enter amount"
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
                 required
               />
             </div>
@@ -369,7 +366,7 @@ export default function InvestmentPage() {
         </div>
       </div>
       
-      {/*Entries List */}
+      {/* Income Entries List */}
       <div style={{ 
         position: 'absolute', 
         top: '670px', 
@@ -380,7 +377,7 @@ export default function InvestmentPage() {
         padding: '20px',
         marginBottom: '30px'
       }}>
-        <h3 style={{ fontFamily: 'Kaisei Decol', fontSize: '24px', marginBottom: '20px' }}>Investment Entries</h3>
+        <h3 style={{ fontFamily: 'Kaisei Decol', fontSize: '24px', marginBottom: '20px' }}>Income Entries</h3>
         {entries.length > 0 ? (
           <ul style={{ listStyle: 'none', padding: '0' }}>
             {entries.map((entry, index) => (
@@ -391,7 +388,7 @@ export default function InvestmentPage() {
                 borderRadius: '10px',
                 fontFamily: 'Kaisei Decol'
               }}>
-                <span>${entry.amount} - {entry.category} on {entry.name}</span>
+                <span>{entry.date} / {entry.category} - ${entry.amount}</span>
                 <button 
                   onClick={() => handleDelete(index)} 
                   style={{
@@ -407,11 +404,12 @@ export default function InvestmentPage() {
                 >
                   Delete
                 </button>
+
               </li>
             ))}
           </ul>
         ) : (
-          <p style={{ fontFamily: 'Kaisei Decol', color: '#666' }}>No entries yet. Add your first investment entry above.</p>
+          <p style={{ fontFamily: 'Kaisei Decol', color: '#666' }}>No entries yet. Add your first income entry above.</p>
         )}
       </div>
     </div>
