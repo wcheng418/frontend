@@ -1,13 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import myImage from '../images/v97_24.png';
 
-// Main SavingsPage Component
+// Main InvestmentPage Component
 export default function InvestmentPage() {
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
   const [entries, setEntries] = useState([]);
+
+  useEffect(() => {
+    /*
+      // Fetch investment entries from Java backend on component mount
+      fetch('http://localhost:8080/api/investments')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch savings entries');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Update local state with entries from backend
+          setEntries(data);
+        })
+        .catch(error => {
+          console.error('Error loading investment entries:', error);
+        });
+    */
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,22 +63,27 @@ export default function InvestmentPage() {
     }
   };
 
+  
   const handleDelete = (indexToRemove) => {
+    const entryToDelete = entries[indexToRemove];
+  
+    // Remove from frontend state
     setEntries(entries.filter((_, index) => index !== indexToRemove));
-
+  
     /*
-    fetch(`http://localhost:8080/api/investments/${entryToDelete.id}`, {
-      method: 'DELETE',
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to delete investment');
-        }
-        console.log('Investment deleted');
+      // Replace `entryToDelete.id` with the actual ID from the database once available
+      fetch(`http://localhost:8080/api/investments/${entryToDelete.id}`, {
+        method: 'DELETE',
       })
-      .catch((error) => {
-        console.error('Error deleting investment:', error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to delete investment entry');
+          }
+          console.log('investment entry deleted');
+        })
+        .catch((error) => {
+          console.error('Error deleting investment entry:', error);
+        });
     */
   };
   
@@ -173,6 +198,7 @@ export default function InvestmentPage() {
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center', 
+            color: 'black',
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
@@ -243,44 +269,6 @@ export default function InvestmentPage() {
         display: 'flex',
         flexDirection: 'column'
       }}>
-        {/* Filter options */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginBottom: '20px' }}>
-          <button
-            onClick={handleSubmit}
-            style={{
-              width: '120px',
-              height: '30px',
-              backgroundColor: '#D9D9D9',
-              borderRadius: '30px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontFamily: 'Kaisei Decol',
-              border: 'none',
-              cursor: 'pointer'
-            }}
-          >
-            Add Investment
-          </button>
-
-          <button
-            onClick={() => setEntries(entries.slice(0, -1))}
-            style={{
-              width: '120px',
-              height: '30px',
-              backgroundColor: '#D9D9D9',
-              borderRadius: '30px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontFamily: 'Kaisei Decol',
-              border: 'none',
-              cursor: 'pointer'
-            }}
-          >
-            Delete Investment
-          </button>
-        </div>
         
         {/* Form Area */}
         <div style={{ 

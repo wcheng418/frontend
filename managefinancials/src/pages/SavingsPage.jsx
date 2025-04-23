@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import myImage from '../images/v97_24.png';
 
@@ -8,6 +8,26 @@ export default function SavingsPage() {
   const [category, setCategory] = useState('');
   const [date, setDate] = useState('');
   const [entries, setEntries] = useState([]);
+  
+  useEffect(() => {
+    /*
+      // Fetch savings entries from Java backend on component mount
+      fetch('http://localhost:8080/api/savings')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch savings entries');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Update local state with entries from backend
+          setEntries(data);
+        })
+        .catch(error => {
+          console.error('Error loading savings entries:', error);
+        });
+    */
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,22 +63,28 @@ export default function SavingsPage() {
   };
   
   const handleDelete = (indexToRemove) => {
+    const entryToDelete = entries[indexToRemove];
+  
+    // Remove from frontend state
     setEntries(entries.filter((_, index) => index !== indexToRemove));
+  
     /*
-    fetch(`http://localhost:8080/api/savings/${entryToDelete.id}`, {
-      method: 'DELETE',
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to delete savings entry');
-        }
-        console.log('Savings entry deleted');
+      // Replace `entryToDelete.id` with the actual ID from the database once available
+      fetch(`http://localhost:8080/api/savings/${entryToDelete.id}`, {
+        method: 'DELETE',
       })
-      .catch((error) => {
-        console.error('Error deleting savings entry:', error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to delete savings entry');
+          }
+          console.log('Savings entry deleted');
+        })
+        .catch((error) => {
+          console.error('Error deleting savings entry:', error);
+        });
     */
   };
+  
   
   return (
     <div style={{ backgroundColor: 'rgba(138,147,180,1)', minHeight: '100vh', position: 'relative' }}>
@@ -240,44 +266,7 @@ export default function SavingsPage() {
         display: 'flex',
         flexDirection: 'column'
       }}>
-        {/* Filter options */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginBottom: '20px' }}>
-          <button
-            onClick={handleSubmit}
-            style={{
-              width: '120px',
-              height: '30px',
-              backgroundColor: '#D9D9D9',
-              borderRadius: '30px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontFamily: 'Kaisei Decol',
-              border: 'none',
-              cursor: 'pointer'
-            }}
-          >
-            Add Savings
-          </button>
 
-          <button
-            onClick={() => setEntries(entries.slice(0, -1))}
-            style={{
-              width: '120px',
-              height: '30px',
-              backgroundColor: '#D9D9D9',
-              borderRadius: '30px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontFamily: 'Kaisei Decol',
-              border: 'none',
-              cursor: 'pointer'
-            }}
-          >
-            Delete Savings
-          </button>
-        </div>
         
         {/* Form Area */}
         <div style={{ 
@@ -400,7 +389,7 @@ export default function SavingsPage() {
                 borderRadius: '10px',
                 fontFamily: 'Kaisei Decol'
               }}>
-                <span>{entry.name} / {entry.category} - ${entry.amount}</span>
+                <span>{entry.date} / {entry.category} - ${entry.amount}</span>
                 <button 
                   onClick={() => handleDelete(index)} 
                   style={{
