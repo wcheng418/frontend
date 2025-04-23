@@ -9,6 +9,7 @@ import Login from './pages/login/login';
 import Reset from './pages/login/reset';
 import IncomePage from './pages/income';
 import ExpensePage from './pages/expense';
+import GoalsPage from './pages/FinancialGoalsPage';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <Route path="/home" element={<IncomePage />} />
         <Route path="/Manage Financials" element={<IncomePage />} />
         <Route path="/Reports" element={<UnderConstructionPage />} />
-        <Route path="/Financial Goals" element={<UnderConstructionPage />} />
+        <Route path="/Financial Goals" element={<GoalsPage />} />
         <Route path="/Account" element={<AccountPage />} />
         <Route path="/Logout" element={<UnderConstructionPage />} />
         <Route path="/Manage Income Entries" element={<IncomePage />} />

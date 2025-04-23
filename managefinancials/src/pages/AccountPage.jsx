@@ -222,14 +222,15 @@ function AccountPage() {
             top: '150px', 
             left: '250px', 
             width: '750px',
-            height: '500px',
+            minHeight: '500px',
+            maxHeight: '80vh',
+            overflowY: 'auto',
             backgroundColor: '#F1F2FA',
             borderRadius: '45px',
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             padding: '40px',
             display: 'flex',
             flexDirection: 'column'
-            
           }}>
             
             {/* Profile Settings Title */}
@@ -245,9 +246,9 @@ function AccountPage() {
             </h2>
             
             {/* Profile Form */}
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
               {/* Profile Picture Section */}
-              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
                   <img 
                     src={previewImage} 
@@ -285,7 +286,7 @@ function AccountPage() {
               </div>
               
               {/* First Name */}
-              <div style={{ marginBottom: '10px' }}>
+              <div style={{ marginBottom: '5px' }}>
                 <label style={{
                   display: 'block',
                   fontFamily: 'Kaisei Decol',
@@ -296,7 +297,7 @@ function AccountPage() {
                   First Name
                 </label>
                 <div style={{
-                  width: '100%',
+                  width: '90%',
                   height: '62px',
                   background: 'rgba(255,255,255,1)',
                   border: '1px solid rgba(0,0,0,1)',
@@ -315,14 +316,16 @@ function AccountPage() {
                       border: 'none',
                       outline: 'none',
                       fontFamily: 'Kaisei Decol',
-                      fontSize: '24px'
+                      fontSize: '24px',
+                      padding: '8px 10px',
+                      boxSizing: 'border-box'
                     }}
                   />
                 </div>
               </div>
               
               {/* Last Name */}
-              <div style={{ marginBottom: '10px' }}>
+              <div style={{ marginBottom: '5px' }}>
                 <label style={{
                   display: 'block',
                   fontFamily: 'Kaisei Decol',
@@ -333,7 +336,7 @@ function AccountPage() {
                   Last Name
                 </label>
                 <div style={{
-                  width: '100%',
+                  width: '90%',
                   height: '62px',
                   background: 'rgba(255,255,255,1)',
                   border: '1px solid rgba(0,0,0,1)',
@@ -352,26 +355,30 @@ function AccountPage() {
                       border: 'none',
                       outline: 'none',
                       fontFamily: 'Kaisei Decol',
-                      fontSize: '24px'
+                      fontSize: '24px',
+                      padding: '8px 10px',
+                      boxSizing: 'border-box'
                     }}
                   />
                 </div>
               </div>
               
               {/* Email */}
-              <div style={{ marginBottom: '10px' }}>
+              <div style={{ marginBottom: '5px' }}>
                 <label style={{
                   display: 'block',
                   fontFamily: 'Kaisei Decol',
                   fontSize: '24px',
                   fontWeight: 'Medium',
                   marginBottom: '8px'
+                  
                 }}>
+                  
                   Email
                 </label>
                 <div style={{
-                  width: '100%',
-                  height: '62px',
+                  width: '90%',
+                  height: '55px',
                   background: 'rgba(255,255,255,1)',
                   border: '1px solid rgba(0,0,0,1)',
                   borderRadius: '11px',
@@ -389,7 +396,9 @@ function AccountPage() {
                       border: 'none',
                       outline: 'none',
                       fontFamily: 'Kaisei Decol',
-                      fontSize: '24px'
+                      fontSize: '24px',
+                      padding: '8px 10px',
+                      boxSizing: 'border-box'
                     }}
                   />
                 </div>
