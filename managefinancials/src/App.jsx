@@ -5,11 +5,19 @@ import SavingsPage from './pages/SavingsPage';
 import InvestmentPage from './pages/InvestmentPage';
 import AccountPage from './pages/AccountPage';
 import UnderConstructionPage from './pages/UnderConstructionPage';
+import Login from './pages/login/login';
+import Reset from './pages/login/reset';
+import Income from './pages/income/income';
+import Expense from './pages/expense/expense';
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/reset" element={<Reset />} />
+        <Route path="/income" element={<Income />} />
+        <Route path="/expense" element={<Expense />} />
         <Route path="/" element={<FrontPage />} />
         <Route path="/home" element={<FrontPage />} />
         <Route path="/Manage Financials" element={<FrontPage />} />
