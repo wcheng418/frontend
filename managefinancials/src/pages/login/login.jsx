@@ -73,7 +73,7 @@ export default function Login() {
                     }}
 
 
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    onChange={(event) => {
                         setEmail(event.target.value);
                     }}
                 />
@@ -109,7 +109,7 @@ export default function Login() {
                     }}
 
 
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    onChange={(event) => {
                         setPassword(event.target.value);
                     }}
                 />
