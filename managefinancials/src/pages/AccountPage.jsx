@@ -112,8 +112,6 @@ function AccountPage() {
       }}>
         <Link to="/home" style={{ textDecoration: 'none' }}>
           <div style={{ position: 'absolute', top: '20px', left: '40px' }}>
-            {/*<h2 style={{ fontFamily: 'serif', fontWeight: 'bold', fontSize: '32px', margin: 0 }}>BW</h2>
-            <span style={{ fontSize: '12px', letterSpacing: '1px' }}>BUDGETWALLET</span>*/}
             <img src={myImage} alt="logo" width="100" height="100" />
           </div>
         </Link>

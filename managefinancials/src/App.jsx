@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/reset" element={<Reset />} />
-        <Route path="/" element={<MonthlyPage />} />
+        <Route path="/" element={<Login />} />
         <Route path="/home" element={<IncomePage />} />
         <Route path="/Manage Financials" element={<IncomePage />} />
         <Route path="/Reports" element={<GenerateReportPage />} />

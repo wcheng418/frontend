@@ -4,26 +4,25 @@ import myImage from '../images/v97_24.png';
 
 // Main GenerateReportPage Component
 export default function GenerateReportPage() {
+  const [startMonth, setStartMonth] = useState('');
+  const [endMonth, setEndMonth] = useState('');
+  const [reportData, setReportData] = useState('');
   
   useEffect(() => {
-    /*
-      // Fetch goal entries from Java backend on component mount
-      fetch('http://localhost:8080/api/goal')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch goal entries');
-          }
-          return response.json();
-        })
-        .then(data => {
-          // Update local state with entries from backend
-          setEntries(data);
-        })
-        .catch(error => {
-          console.error('Error loading goal entries:', error);
-        });
-    */
+
   }, []);  
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setReportData(`Financial Report
+Start Date: ${startMonth}
+    Total Income: $5,000
+    Total Savings: $1,200
+    Total Investment: $800
+    Total Expenses: $3,000
+End Date: ${endMonth}`);
+  };
   
   return (
     <div style={{ backgroundColor: 'rgba(138,147,180,1)', minHeight: '100vh', position: 'relative' }}>
@@ -173,33 +172,87 @@ export default function GenerateReportPage() {
         display: 'flex',
         flexDirection: 'column'
       }}>
-
+        <h2 style={{ textAlign: 'center', fontFamily: 'Kaisei Decol', marginBottom: '20px' }}>Generate Financial Report</h2>
+      
+        {/* Input Form Section */}
+        <div style={{ 
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '15px',
+          marginBottom: '20px'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <label style={{ marginRight: '10px', fontFamily: 'Kaisei Decol' }}>Start Month:</label>
+            <input 
+              type="month" 
+              value={startMonth}
+              onChange={(e) => setStartMonth(e.target.value)}
+              style={{ 
+                padding: '8px',
+                borderRadius: '5px',
+                border: '1px solid #ccc'
+              }}
+            />
+          </div>
+          
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <label style={{ marginRight: '10px', fontFamily: 'Kaisei Decol' }}>End Month:</label>
+            <input 
+              type="month" 
+              value={endMonth}
+              onChange={(e) => setEndMonth(e.target.value)}
+              style={{ 
+                padding: '8px',
+                borderRadius: '5px',
+                border: '1px solid #ccc'
+              }}
+            />
+          </div>
+          
+          <button 
+            onClick={handleSubmit}
+            style={{ 
+              backgroundColor: '#3B4471',
+              color: 'white',
+              padding: '8px 15px',
+              borderRadius: '5px',
+              border: 'none',
+              cursor: 'pointer',
+              fontFamily: 'Kaisei Decol',
+              boxShadow: '0px 2px 2px rgba(0,0,0,0.25)'
+            }}
+          >
+            Generate Financial Report
+          </button>
+        </div>
         
-        {/* Form Area */}
+        {/* Report Output Area */}
         <div style={{ 
           backgroundColor: '#D9D9D9', 
           flex: 1, 
           borderRadius: '30px',
           padding: '20px',
           display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center'
+          flexDirection: 'column'
         }}>
-        
-        <div>
-            <textarea id="FillerReport" row = "8">
-                Financial Report (Report Type)
-                (Start Date)
-                    Total Income : (Net Income)
-                    Total Savings : (Total Savings)
-                    Total Investment : (Total Investment)
-                    Total Expenses : (Total Expenses)
-                (End Date)
-            </textarea>
-                
-        </div>
-          
+          <textarea
+            value={reportData}
+            readOnly
+            placeholder="Select start and end months, then click 'Generate Report' to view financial data"
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'transparent',
+              border: 'none',
+              resize: 'none',
+              fontFamily: 'monospace',
+              fontSize: '16px',
+              lineHeight: '1.5',
+              padding: '10px',
+              boxSizing: 'border-box'
+            }}
+          />
         </div>
       </div>
     </div>

@@ -139,7 +139,7 @@ export default function MonthlyPage() {
             boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
             cursor: 'pointer'
           }}>
-            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px' }}>Generate Report</span>
+            <span style={{ fontFamily: 'Kaisei Decol', fontSize: '24px' }}>Generate Financial Report</span>
           </div>
         </Link>
         
